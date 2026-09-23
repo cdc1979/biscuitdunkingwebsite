@@ -2,4 +2,4 @@
 
 A static website for the Biscuit Dunking game. The homepage reads global gameplay totals from the existing public API at `https://biscuit-dunker-leaderboard.cdc1979.workers.dev/api/summary`; this site does not configure or deploy that service.
 
-Open `public/index.html` directly for a static preview, or serve the `public/` directory with any static file server. The game page at `/play/` is a local playable demo; the summary API currently provides aggregate stats, not individual player rankings or score submission.
+Serve the project root with any static file server. The `/play/` page is a placeholder for the separately hosted game embed. This website only reads the summary API and never submits scores or other gameplay data.
