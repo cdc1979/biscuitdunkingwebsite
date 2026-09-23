@@ -11,7 +11,14 @@ document.querySelectorAll('a[href="/play/"]').forEach((link) => {
 document.addEventListener('click', (event) => {
   const link = event.target.closest('a[href="/play/"]');
   if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-  const popup = window.open(link.href, 'biscuitDunkingGame', 'popup=yes,width=414,height=844,innerWidth=414,innerHeight=844,toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes');
+  const screenWidth = window.screen.availWidth || window.innerWidth;
+  const screenHeight = window.screen.availHeight || window.innerHeight;
+  const width = Math.floor(screenWidth * 0.3);
+  const height = Math.floor(screenHeight * 0.9);
+  const left = Math.round((screenWidth - width) / 2 + (window.screen.availLeft ?? 0));
+  const top = Math.round((screenHeight - height) / 2 + (window.screen.availTop ?? 0));
+  const features = `popup=yes,width=${width},height=${height},innerWidth=${width},innerHeight=${height},left=${left},top=${top},toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes`;
+  const popup = window.open(link.href, 'biscuitDunkingGame', features);
   if (popup) {
     event.preventDefault();
     popup.focus();
