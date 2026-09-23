@@ -3,6 +3,21 @@ const updated = document.querySelector('#board-updated');
 const year = document.querySelector('#year');
 if (year) year.textContent = new Date().getFullYear();
 
+document.querySelectorAll('a[href="/play/"]').forEach((link) => {
+  link.target = '_blank';
+  link.rel = 'noopener';
+});
+
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href="/play/"]');
+  if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const popup = window.open(link.href, 'biscuitDunkingGame', 'popup=yes,width=414,height=844,innerWidth=414,innerHeight=844,toolbar=no,menubar=no,location=no,status=no,scrollbars=yes,resizable=yes');
+  if (popup) {
+    event.preventDefault();
+    popup.focus();
+  }
+});
+
 function renderSummary(summary) {
   if (!list) return;
   const count = (value) => Number(value ?? 0).toLocaleString();
