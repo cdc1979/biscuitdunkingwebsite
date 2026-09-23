@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><meta name="theme-color" content="#071d1a" />
+    <meta name="description" content="Find the golden dip and climb the Biscuit Dunking global leaderboard." />
+    <title>Play Biscuit Dunking</title><link rel="icon" href="/favicon.svg" type="image/svg+xml" /><link rel="stylesheet" href="/styles.css" /><script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header wrap"><a class="brand" href="/" aria-label="Biscuit Dunking home"><span class="brand-mark">☕</span><span>BISCUIT <b>DUNKING</b></span></a><nav aria-label="Main navigation"><a class="nav-link" href="/">Home</a><a class="nav-link" href="/#leaderboard">Leaderboard</a><a class="nav-link" href="/privacy/">Privacy</a></nav></header>
+    <main class="play-page wrap"><section class="game-shell" aria-labelledby="game-title"><div class="game-head"><div><p class="eyebrow">THE GREAT BRITISH DUNK-OFF</p><h1 id="game-title">Ready, steady, dunk.</h1></div><a class="back-link" href="/">← Back home</a></div>
+      <div class="game-stats"><div class="stat-box"><span>YOUR SCORE</span><b id="game-score">0</b></div><div class="stat-box"><span>GOOD DUNKS</span><b id="game-dunks">0</b></div><div class="stat-box"><span>BISCUITS</span><b id="game-biscuits">0</b></div></div>
+      <div class="game-stage" id="game-stage"><div class="stage-stars"></div><p class="game-prompt" id="game-prompt">FIND THE SWEET SPOT</p><div class="game-biscuit biscuit" id="game-biscuit"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="game-mug"><div class="mug-handle"></div><div class="tea"><span class="tea-shine"></span></div><div class="mug-rim"></div><div class="mug-body"><span class="mug-emblem">✳</span><span>GOOD<br />DUNK</span></div><div class="mug-foot"></div></div><div class="dip-gauge"><span>DIP</span><div class="gauge-track"><div class="gauge-fill" id="gauge-fill"></div></div><span class="gauge-label">%</span></div></div>
+      <div class="game-actions"><button class="button dip-button" id="dip-button" type="button">Hold to dunk <span>↓</span></button></div><p class="game-hint">Press and hold to dip. Let go when you hit the golden spot.</p><p class="result-message" id="game-result" aria-live="polite">Steady now. Find your sweet spot.</p><p class="alias-note">Scores save under an automatically generated mug name. No personal details needed.</p><div class="game-lower"><span>GOLDEN DIP: 50–65%</span><a href="/#leaderboard">SEE THE GLOBAL LEADERBOARD →</a></div>
+    </section></main>
+    <footer class="site-footer"><div class="footer-main wrap"><a class="brand" href="/"><span class="brand-mark">☕</span><span>BISCUIT <b>DUNKING</b></span></a><p>Made for tea breaks and biscuit bravery.</p><div class="footer-links"><a href="/play/">Play</a><a href="/#leaderboard">Leaderboard</a><a href="/privacy/">Privacy policy</a></div></div><div class="footer-bottom wrap"><span>© <span id="year"></span> Biscuit Dunking</span><span>THE KETTLE IS ALWAYS ON <b>✳</b></span></div></footer>
+  </body>
+</html>
