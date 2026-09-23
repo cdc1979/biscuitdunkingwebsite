@@ -3,59 +3,79 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#071d1a" />
-    <meta name="description" content="A little biscuit, a warm mug, and one very important dunk. Play Biscuit Dunking and climb the global leaderboard." />
-    <title>Biscuit Dunking — The Great British Dunk-Off</title>
+    <meta name="theme-color" content="#091d19" />
+    <meta name="description" content="Join the world's tea break. See the live global biscuit dunk count, explore the leaderboard, and play Biscuit Dunking Simulator." />
+    <title>Biscuit Dunking — Every Biscuit Counts</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/styles.css" />
     <script src="/app.js" defer></script>
   </head>
   <body>
+
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header wrap">
-      <a class="brand" href="/" aria-label="Biscuit Dunking home"><span class="brand-mark">☕</span><span>BISCUIT <b>DUNKING</b></span></a>
-      <nav aria-label="Main navigation"><a class="nav-link active" href="/">Home</a><a class="nav-link" href="/leaderboard/">Leaderboard</a><a class="nav-link" href="/privacy/">Privacy</a><a class="button button-small" href="/play/">Play <span>↗</span></a></nav>
-    </header>
-
-    <main>
-    <section class="global-total" aria-label="Global biscuits dunked">
-      <a class="global-total-link" href="/leaderboard/">
-        <span class="global-total-seal" aria-hidden="true">✳</span>
-        <span class="global-total-label">GLOBAL BISCUITS DUNKED</span>
-        <strong id="stat-total">—</strong>
-        <span class="global-total-link-label">A WORLDWIDE TEA BREAK <i>·</i> VIEW LEADERBOARD ↗</span>
+      <a class="brand" href="/" aria-label="Biscuit Dunking home">
+        <img src="/android_icon.png" width="48" height="48" alt="" />
+        <span>Biscuit <b>Dunking</b><small>SIMULATOR</small></span>
       </a>
-    </section>
-
-      <section class="hero wrap">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-star">✳</span> THE GREAT BRITISH DUNK-OFF</p>
-          <h1>One mug.<br />One biscuit.<br /><em>Glory awaits.</em></h1>
-          <p class="hero-description">Take a biscuit, find the sweet spot, and see how long you can keep your dunk going. The kettle’s on.</p>
-          <div class="hero-actions"><a class="button" href="/play/">Go to the game page <span>→</span></a><a class="text-link" href="/leaderboard/">Full leaderboard <span>↗</span></a></div>
-          <div class="hero-stats" aria-label="Live global Biscuit Dunking stats">
-            <div class="hero-stat"><span>COMPLETED RUNS</span><strong id="stat-runs">—</strong><small>ALL DUNKERS</small></div>
-            <div class="hero-stat"><span>MOST POPULAR</span><strong id="stat-popular">—</strong><small id="stat-popular-runs">TOP BISCUIT</small></div>
-          </div>
-          <div class="hero-note"><span class="live-dot"></span> FRESH TEA. GLOBAL DUNK TOTALS. QUESTIONABLE DUNKING TECHNIQUE.</div>
+      <nav aria-label="Main navigation">
+        <a href="/" aria-current="page">Home</a>
+        <a href="/leaderboard/">Leaderboard</a>
+        <a href="/privacy/">Privacy</a>
+        <a class="button button-small" href="/play/" data-play>Play <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main-content">
+      <section class="global-total wrap" aria-labelledby="counter-label">
+        <div class="counter-top"><span class="eyebrow">ONE WORLD. ONE BIG TEA BREAK.</span><span class="status" data-summary-status role="status">Fetching totals…</span></div>
+        <div class="counter-focus">
+          <div class="ornament" aria-hidden="true"><span></span>✦<span></span></div>
+          <h1 id="counter-label">Global biscuits dunked</h1>
+          <strong id="stat-total" class="counter-number" aria-describedby="counter-label">—</strong>
+          <p class="counter-caption">Every biscuit. Every dunk. All of us.</p>
         </div>
-        <div class="hero-art" aria-label="Illustration of a biscuit being dunked into a cup of tea" role="img">
-          <div class="halo halo-one"></div><div class="halo halo-two"></div><span class="spark spark-a">✦</span><span class="spark spark-b">✳</span><span class="spark spark-c">✧</span>
-          <div class="steam steam-one"></div><div class="steam steam-two"></div><div class="steam steam-three"></div>
-          <div class="biscuit biscuit-hero"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <div class="mug"><div class="mug-handle"></div><div class="tea"><span class="tea-shine"></span></div><div class="mug-rim"></div><div class="mug-body"><span class="mug-emblem">✳</span><span>GOOD<br />DUNK</span></div><div class="mug-foot"></div></div>
-          <div class="splash splash-left"></div><div class="splash splash-right"></div>
-          <div class="art-caption"><span>THE PERFECT DIP</span><i></i><span>60% DUNKED</span></div>
-          <div class="hero-stamp"><span>EST.</span><b>TEA<br />TIME</b><span>ALWAYS</span></div>
+        <dl class="counter-secondary">
+          <div><dt>Completed runs</dt><dd id="stat-runs">—</dd></div>
+          <div><dt>The world's favourite</dt><dd id="stat-popular">—</dd><span id="stat-popular-runs" class="stat-detail">Most popular biscuit</span></div>
+        </dl>
+        <div class="counter-footer"><span>A little biscuit. A global obsession.</span><a class="text-link" href="/leaderboard/">Full leaderboard <span aria-hidden="true">→</span></a></div>
+        <p class="summary-error" data-summary-error hidden>We couldn't reach the biscuit tin. <button class="text-button" type="button" data-refresh>Try again</button></p>
+      </section>
+
+      <section class="game-intro wrap" aria-labelledby="intro-title">
+        <div class="intro-copy">
+          <p class="eyebrow">THE GREAT BRITISH DUNK-OFF</p>
+          <h2 id="intro-title">One mug. One biscuit.<br /><em>Glory awaits.</em></h2>
+          <p>Find the golden dip. Hold your nerve. Lift before your biscuit makes a permanent home at the bottom of the mug.</p>
+          <div class="intro-actions"><a class="button" href="/play/" data-play><span aria-hidden="true">▶</span> Play Biscuit Dunking <span aria-hidden="true">↗</span></a><a class="text-link" href="#how-to-dunk">How to dunk <span aria-hidden="true">↓</span></a></div>
+        </div>
+        <figure class="game-art">
+          <img src="/feature_graphic.png" width="1024" height="500" alt="Biscuit Dunking Simulator: a golden biscuit dipping into a striped teacup." decoding="async" />
+          <figcaption><span aria-hidden="true">✦</span> A proper cup of tea. A very improper amount of dunking.</figcaption>
+        </figure>
+      </section>
+
+      <section class="how-section wrap" id="how-to-dunk" aria-labelledby="how-title">
+        <div class="section-heading"><div><p class="eyebrow">A VERY SERIOUS SPORT</p><h2 id="how-title">The art of a good dunk.</h2></div><p>Three small steps.<br /> One deliciously risky biscuit.</p></div>
+        <div class="steps">
+          <article class="step-card"><span class="step-number">01</span><h3>Pick your biscuit</h3><p>Browse the shelf and choose your champion. Press and hold to pick it up.</p><span class="step-foot">THE START OF SOMETHING CRUMBLY</span></article>
+          <article class="step-card"><span class="step-number">02</span><h3>Find the golden dip</h3><p>Lower it until about 60% is in the tea. Watch the dip gauge for that sweet spot.</p><span class="step-foot">A LITTLE PATIENCE GOES A LONG WAY</span></article>
+          <article class="step-card"><span class="step-number">03</span><h3>Lift with grace</h3><p>A clean lift scores a dunk. Each dip softens your biscuit, so mind the mug.</p><span class="step-foot">KNOW WHEN TO CALL IT A TEA BREAK</span></article>
         </div>
       </section>
 
-      <section class="ticker" aria-label="Game motto"><div class="ticker-track"><span>✳ FIND THE SWEET SPOT</span><span>☕ MIND THE MUG</span><span>✳ DIP WITH PURPOSE</span><span>☕ FIND THE SWEET SPOT</span><span>✳ MIND THE MUG</span><span>☕ DIP WITH PURPOSE</span></div></section>
-
-      <section class="leaderboard-teaser wrap"><div><p class="eyebrow">THE WORLDWIDE TALLY</p><h2>See how the world dunks.</h2><p>Biscuits, runs, and dunking records from around the tea table.</p></div><a class="button button-outline" href="/leaderboard/">Visit the leaderboard <span>→</span></a></section>
-
-      <section class="how-section wrap" id="how-to-dunk"><div class="how-intro"><p class="eyebrow">A VERY SERIOUS SPORT</p><h2>It’s all in<br />the <em>wrist.</em></h2><p>One small dip separates a soggy tragedy from biscuit immortality.</p><a href="/play/" class="button">Go to the game page <span>→</span></a></div><div class="steps"><article class="step-card"><span class="step-number">01</span><div class="step-icon">▧</div><h3>Pick your biscuit</h3><p>Choose your champion. Rich tea is brave; a custard cream is a statement.</p></article><article class="step-card"><span class="step-number">02</span><div class="step-icon">◉</div><h3>Find the sweet spot</h3><p>Dip deep enough to soften the edges, not so deep you lose the whole dunk.</p></article><article class="step-card"><span class="step-number">03</span><div class="step-icon">⌁</div><h3>Lift with grace</h3><p>Keep your nerve, mind the mug, and make every second count.</p></article></div></section>
+      <section class="leaderboard-teaser wrap">
+        <div><p class="eyebrow">THE WORLDWIDE TALLY</p><h2>See how the world dunks.</h2><p>Favourite biscuits, average dunk life, and the ones that got away.</p></div>
+        <a class="button button-secondary" href="/leaderboard/">Explore the leaderboard <span aria-hidden="true">→</span></a>
+      </section>
     </main>
 
-    <footer class="site-footer"><div class="footer-main wrap"><a class="brand" href="/"><span class="brand-mark">☕</span><span>BISCUIT <b>DUNKING</b></span></a><p>Made for tea breaks and biscuit bravery.</p><div class="footer-links"><a href="/play/">Game</a><a href="/leaderboard/">Leaderboard</a><a href="/privacy/">Privacy policy</a></div></div><div class="footer-bottom wrap"><span>© <span id="year"></span> Biscuit Dunking</span><span>THE KETTLE IS ALWAYS ON <b>✳</b></span></div></footer>
+    <footer class="site-footer">
+      <div class="footer-main wrap">
+        <a class="brand" href="/" aria-label="Biscuit Dunking home"><img src="/android_icon.png" width="40" height="40" alt="" /><span>Biscuit <b>Dunking</b><small>THE KETTLE IS ALWAYS ON</small></span></a>
+        <nav aria-label="Footer navigation"><a href="/play/" data-play>Play the game</a><a href="/leaderboard/">Leaderboard</a><a href="/privacy/">Privacy policy</a></nav>
+      </div>
+      <div class="footer-bottom wrap"><span>© <span id="year">2026</span> Biscuit Dunking</span><span>Made for tea breaks &amp; biscuit bravery. <b aria-hidden="true">✦</b></span></div>
+    </footer>
   </body>
 </html>

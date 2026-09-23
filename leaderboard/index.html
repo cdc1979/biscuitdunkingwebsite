@@ -3,31 +3,46 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#071d1a" />
-    <meta name="description" content="Live global biscuit dunking totals and records." />
+    <meta name="theme-color" content="#091d19" />
+    <meta name="description" content="Explore the live global biscuit dunking totals: favourite biscuits, completed runs, average dunk life, and more." />
     <title>Global Leaderboard — Biscuit Dunking</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/styles.css" />
     <script src="/app.js" defer></script>
   </head>
   <body>
-    <header class="site-header wrap">
-      <a class="brand" href="/" aria-label="Biscuit Dunking home"><span class="brand-mark">☕</span><span>BISCUIT <b>DUNKING</b></span></a>
-      <nav aria-label="Main navigation"><a class="nav-link" href="/">Home</a><a class="nav-link active" href="/leaderboard/">Leaderboard</a><a class="nav-link" href="/privacy/">Privacy</a><a class="button button-small" href="/play/">Play <span>↗</span></a></nav>
-    </header>
 
-    <main class="leaderboard-page wrap">
-      <section class="leaderboard-section">
-        <div class="section-heading"><div><p class="eyebrow">THE WORLDWIDE TALLY</p><h1>Big dunk energy.</h1><p class="section-subtitle">The latest biscuit, mug, and run totals from around the tea table.</p></div><a class="button button-outline" href="/">Back home <span>↗</span></a></div>
-        <div class="board-shell"><div class="board-top"><div><span class="board-cup">♜</span><div><h3>Global dunking board</h3><p>All-time biscuit dunking stats</p></div></div><span class="board-live"><i></i> LIVE STATS</span></div>
-          <div class="summary-columns"><span>THE TEA-TIME TOTALS</span><span>GLOBAL TALLY</span></div>
-          <div class="summary-list" id="summary-list" aria-live="polite"><div class="score-loading"><span class="loader"></span>Fetching the good mugs…</div></div>
-          <div class="board-foot"><span id="board-updated">Connecting to the biscuit tin</span><span>ALL-TIME GAME DATA <b>✳</b></span></div>
-        </div>
-        <p class="board-privacy">This page displays global game stats only. <a href="/privacy/">How we handle game data →</a></p>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header wrap">
+      <a class="brand" href="/" aria-label="Biscuit Dunking home">
+        <img src="/android_icon.png" width="48" height="48" alt="" />
+        <span>Biscuit <b>Dunking</b><small>SIMULATOR</small></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/leaderboard/" aria-current="page">Leaderboard</a>
+        <a href="/privacy/">Privacy</a>
+        <a class="button button-small" href="/play/" data-play>Play <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main class="page-main wrap" id="main-content">
+      <div class="page-heading"><p class="eyebrow">GLOBAL LEADERBOARD</p><h1>The world's tea break.</h1><p>Every biscuit has a part to play. Here's the collective dunking record.</p></div>
+      <section class="board-shell" aria-labelledby="board-title">
+        <div class="board-top"><div><span class="eyebrow">THE ALL-TIME TALLY</span><h2 id="board-title">Records from the tea table</h2></div><span class="status" data-summary-status role="status">Fetching totals…</span></div>
+        <div class="summary-columns" aria-hidden="true"><span>THE RECORD</span><span>GLOBAL TOTAL</span></div>
+        <dl class="summary-list" id="summary-list"><div class="score-loading">Fetching the good mugs…</div></dl>
+        <div class="board-foot"><span id="board-updated">Loading the latest totals</span><button class="text-button" type="button" data-refresh>Refresh stats <span aria-hidden="true">↻</span></button></div>
       </section>
+      <p class="board-privacy">Global game statistics, without personal details. <a href="/privacy/">Read our privacy policy <span aria-hidden="true">→</span></a></p>
+      <div class="board-callout"><img src="/android_icon.png" width="76" height="76" alt="" /><div><h2>The kettle's on.</h2><p>Your next tea break could be a personal best.</p></div><a class="button" href="/play/" data-play>Play the game <span aria-hidden="true">↗</span></a></div>
     </main>
 
-    <footer class="site-footer"><div class="footer-main wrap"><a class="brand" href="/"><span class="brand-mark">☕</span><span>BISCUIT <b>DUNKING</b></span></a><p>Made for tea breaks and biscuit bravery.</p><div class="footer-links"><a href="/">Home</a><a href="/play/">Game</a><a href="/privacy/">Privacy policy</a></div></div><div class="footer-bottom wrap"><span>© <span id="year"></span> Biscuit Dunking</span><span>THE KETTLE IS ALWAYS ON <b>✳</b></span></div></footer>
+    <footer class="site-footer">
+      <div class="footer-main wrap">
+        <a class="brand" href="/" aria-label="Biscuit Dunking home"><img src="/android_icon.png" width="40" height="40" alt="" /><span>Biscuit <b>Dunking</b><small>THE KETTLE IS ALWAYS ON</small></span></a>
+        <nav aria-label="Footer navigation"><a href="/play/" data-play>Play the game</a><a href="/leaderboard/">Leaderboard</a><a href="/privacy/">Privacy policy</a></nav>
+      </div>
+      <div class="footer-bottom wrap"><span>© <span id="year">2026</span> Biscuit Dunking</span><span>Made for tea breaks &amp; biscuit bravery. <b aria-hidden="true">✦</b></span></div>
+    </footer>
   </body>
 </html>
