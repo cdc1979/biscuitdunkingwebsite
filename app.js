@@ -1,24 +1,21 @@
-const list = document.querySelector('#score-list');
+const list = document.querySelector('#summary-list');
 const updated = document.querySelector('#board-updated');
 const year = document.querySelector('#year');
 if (year) year.textContent = new Date().getFullYear();
 
-const faces = ['🍪', '☕', '🍯', '🥮', '🫖', '🍪', '🥛', '🍩', '🍪', '🧁'];
-const medals = ['✦', '✦', '✦'];
-function renderScores(scores) {
+function renderSummary(summary) {
   if (!list) return;
-  if (!scores.length) {
-    list.innerHTML = '<li class="score-empty">No dunkers just yet. Be the first to claim the mug.</li>';
-    updated.textContent = 'THE FIRST SCORE IS YOURS';
-    return;
-  }
-  list.innerHTML = scores.map((row, i) => `<li class="score-row">
-    <span class="rank"><span class="medal">${medals[i] || String(i + 1).padStart(2, '0')}</span><span>#${i + 1}</span></span>
-    <span class="player-cell"><span class="player-avatar">${faces[(row.id || i) % faces.length]}</span><span><span class="player-name">${escapeText(row.player)}</span><span class="player-sub">${row.dunks} ${row.dunks === 1 ? 'DUNK' : 'DUNKS'} · ${row.biscuits} BISCUITS</span></span></span>
-    <span class="score-number">${Number(row.score).toLocaleString()}</span>
-    <span class="score-metric">${row.biscuits}<small>BISCUITS</small></span>
-    <span class="score-metric">${row.bestDip}%<small>BEST DIP</small></span>
-  </li>`).join('');
+  const count = (value) => Number(value ?? 0).toLocaleString();
+  const decimal = (value) => Number(value ?? 0).toFixed(1);
+  const stats = [
+    ['✦', 'Biscuits dunked worldwide', count(summary.total_global_biscuits_dunked)],
+    ['▧', 'Most popular biscuit', `${escapeText(summary.most_popular_biscuit || '—')} <small>${count(summary.most_popular_biscuit_runs)} RUNS</small>`],
+    ['◷', 'Completed runs', count(summary.completed_runs)],
+    ['⌁', 'Average dunk life', `${decimal(summary.average_dunk_life_seconds)} <small>SECONDS</small>`],
+    ['☕', 'Average dunks per run', decimal(summary.average_dunks)],
+    ['↓', 'Dropped in', count(summary.dropped_in)],
+  ];
+  list.innerHTML = stats.map(([icon, label, value]) => `<div class="summary-row"><span class="summary-icon">${icon}</span><span class="summary-label">${label}</span><span class="summary-value">${value}</span></div>`).join('');
   updated.textContent = `UPDATED ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
 }
 function escapeText(text) {
@@ -29,13 +26,14 @@ function escapeText(text) {
 async function loadScores() {
   if (!list) return;
   try {
-    const response = await fetch('/api/leaderboard', { headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error('Scoreboard unavailable');
+    const response = await fetch('https://biscuit-dunker-leaderboard.cdc1979.workers.dev/api/summary', { headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error('Summary unavailable');
     const data = await response.json();
-    renderScores(Array.isArray(data.scores) ? data.scores : []);
+    if (!data.ok) throw new Error(data.error || 'Summary unavailable');
+    renderSummary(data);
   } catch {
-    list.innerHTML = '<li class="score-empty">The biscuit tin is taking a tea break. Try again in a moment.</li>';
-    updated.textContent = 'SCORES TEMPORARILY UNAVAILABLE';
+    list.innerHTML = '<div class="score-empty">The biscuit tin is taking a tea break. Try again in a moment.</div>';
+    updated.textContent = 'GLOBAL STATS TEMPORARILY UNAVAILABLE';
   }
 }
 loadScores();
@@ -50,8 +48,7 @@ if (stage) {
   const dunkEl = document.querySelector('#game-dunks');
   const biscuitEl = document.querySelector('#game-biscuits');
   const result = document.querySelector('#game-result');
-  let score = 0, dunks = 0, biscuits = 0, bestDip = 0, active = false, startedAt = 0, timer = 0, dip = 0, round = 0;
-  const alias = `Mug-${crypto.getRandomValues(new Uint16Array(1))[0].toString(16).toUpperCase().padStart(4, '0').slice(-4)}`;
+  let score = 0, dunks = 0, biscuits = 0, active = false, startedAt = 0, timer = 0, dip = 0;
   const setMessage = (message) => { result.textContent = message; };
   function endDip() {
     if (!active) return;
@@ -66,8 +63,7 @@ if (stage) {
       setMessage('A little too quick — give it a proper dunk!');
     } else if (dip <= 72) {
       const points = Math.max(10, Math.round((100 - Math.abs(dip - 58) * 1.6) * Math.max(1, Math.floor(dip / 28))));
-      score += points; dunks++; round++;
-      if (dip > bestDip) bestDip = dip;
+      score += points; dunks++;
       scoreEl.textContent = score;
       dunkEl.textContent = dunks;
       biscuits++;
@@ -75,14 +71,11 @@ if (stage) {
       biscuit.classList.toggle('biscuit-hero', false);
       biscuit.animate([{ transform: 'rotate(-15deg) translateY(24px)' }, { transform: 'rotate(-23deg) translateY(0)' }], { duration: 380, easing: 'ease-out' });
       setMessage(dip >= 50 && dip <= 65 ? `Golden dip! +${points} points` : `Lovely dunk! +${points} points`);
-      if (score > 0 && round % 2 === 0) submitScore();
     } else {
-      round++;
       biscuit.classList.add('dropped');
       setMessage('Crumbly ending! That biscuit’s gone to the bottom.');
       button.textContent = 'New biscuit';
       button.dataset.restart = 'true';
-      if (dunks > 0) submitScore();
     }
     prompt.textContent = 'DIP DEPTH';
     fill.style.height = `${dip}%`;
@@ -90,7 +83,7 @@ if (stage) {
   function startDip(event) {
     if (event) event.preventDefault();
     if (button.dataset.restart === 'true') {
-      score = 0; dunks = 0; biscuits = 0; bestDip = 0; round = 0;
+      score = 0; dunks = 0; biscuits = 0;
       scoreEl.textContent = '0'; dunkEl.textContent = '0'; biscuitEl.textContent = '0';
       biscuit.classList.remove('dropped');
       button.dataset.restart = '';
@@ -109,14 +102,6 @@ if (stage) {
       fill.style.height = `${dip}%`;
       if (dip >= 100) endDip();
     }, 40);
-  }
-  async function submitScore() {
-    try {
-      await fetch('/api/leaderboard', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ player: alias, score, dunks, bestDip, biscuits }),
-      });
-    } catch { /* A local run remains playable if the score service is away. */ }
   }
   button.addEventListener('pointerdown', startDip);
   window.addEventListener('pointerup', endDip);
