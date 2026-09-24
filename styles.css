@@ -88,6 +88,11 @@ em { color: var(--gold); font-style: normal; }
 .game-art img { width: 100%; height: auto; border-radius: 10px; }
 .game-art figcaption { display: flex; justify-content: center; align-items: center; gap: 9px; padding: 12px 8px 6px; font-size: 14px; line-height: 1.5; color: #c2c9b4; text-align: center; }
 .game-art figcaption span { color: var(--gold); }
+.video-section { padding-block: 16px 58px; }
+.video-heading { margin-bottom: 20px; }
+.video-heading h2 { margin: 8px 0 0; font: 700 clamp(30px, 3.2vw, 40px)/1.15 var(--serif); letter-spacing: -.025em; }
+.video-frame { aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid #8c784b; border-radius: 16px; background: #071712; box-shadow: 0 16px 40px #0003; }
+.video-frame iframe { display: block; width: 100%; height: 100%; border: 0; }
 .how-section { padding-block: 48px 60px; border-top: 1px solid var(--line); }
 .section-heading { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 28px; }
 .section-heading h2, .leaderboard-teaser h2 { font: 700 clamp(30px, 3.2vw, 40px)/1.15 var(--serif); letter-spacing: -.025em; margin: 10px 0 0; }
@@ -190,6 +195,9 @@ em { color: var(--gold); font-style: normal; }
   .intro-actions .button { font-size: 17px; padding-inline: 18px; gap: 12px; }
   .game-art { transform: none; }
   .game-art figcaption { font-size: 13px; }
+  .video-section { padding-block: 4px 36px; }
+  .video-heading { margin-bottom: 14px; }
+  .video-frame { border-radius: 12px; }
   .how-section { padding-block: 32px 36px; }
   .section-heading { display: block; margin-bottom: 22px; }
   .section-heading h2 { font-size: 32px; }
